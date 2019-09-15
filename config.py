@@ -1,5 +1,23 @@
+import os
+
 class Config:
+    SECRET_KEY = os.environ.get('SECRET_KEY')
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://james:29654387@localhost/watchlist'
+
+    @staticmethod
+    def init_app(app):
+        pass
+
+
+class ProdConfig(Config):
+    pass
+
+
+class DevConfig(Config):
     DEBUG = True
-    SECRET_KEY = 'xydcfgvdfgxcvbxcvrtyxcvfgjnnnbgvvvhjgv'
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://keren:kayren@localhost:5432/pitchit'
-    SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+config_options = {
+'development':DevConfig,
+'production':ProdConfig
+
+}
