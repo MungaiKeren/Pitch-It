@@ -13,3 +13,10 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField('Sign Up')
 
     # password and email verification
+    def validate_email(self,data_field):
+        if User.query.filter_by(email = data_field.data).first():
+            raise ValidationError("There's an account with that email")
+    
+    def validate_username(self,data_field):
+        if User.query.filter_by(username=data_field.data).first():
+            raise ValidationError("That user name is taken")
