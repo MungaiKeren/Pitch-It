@@ -3,6 +3,7 @@ import os
 class Config:
     SECRET_KEY='ercfgvbniojnngfdfgssdfghjsdfghdfg'
     SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://keren:kayren@localhost/ppitch'
+    UPLOADED_PHOTOS_DEST='app/static/photos'
 
     @staticmethod
     def init_app(app):
