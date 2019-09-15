@@ -4,5 +4,5 @@ from wtforms.validators import Required,Email,EqualTo
 from wtforms import ValidationError
 
 class UpdateProfile(FlaskForm):
-    bio = TextAreaField(f'Edit {user.name|capitalize} bio',validators=[Required()])
+    bio = TextAreaField('Edit bio',validators=[Required()])
     submit = SubmitField('submit')
