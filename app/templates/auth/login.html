@@ -1,0 +1,21 @@
+{%extends 'base.html'%}
+{%block content%}
+{{ super() }}
+<div class="container">
+    <form action="/login" method="POST">
+        <div class="form-group">
+            <label for="username">User name</label>
+            <input type="text" class="form-control" name="username" placeholder="User Name" required id="">
+        </div>
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" name="email" placeholder="Email" required id="">
+        </div>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" placeholder="Password" name="password" class="form-control" id="">
+        </div>
+        <button type="submit" class="btn btn-outline-success">Submit</button>
+    </form>
+</div>
+{% endblock %}
