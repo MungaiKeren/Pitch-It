@@ -2,7 +2,7 @@ import os
 
 class Config:
     SECRET_KEY = os.environ.get('SECRET_KEY')
-    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://james:29654387@localhost/watchlist'
+    SQLALCHEMY_DATABASE_URI = 'postgresql+psycopg2://keren:kayren@localhost/ppitch'
 
     @staticmethod
     def init_app(app):
