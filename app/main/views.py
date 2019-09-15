@@ -3,7 +3,7 @@ from . import main
 from flask_login import login_required
 from ..models import User
 from .forms import UpdateProfile
-from .. import db,photos
+from .. import db
 
 @main.route('/')
 @login_required
