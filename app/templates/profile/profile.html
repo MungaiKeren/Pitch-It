@@ -1,0 +1,26 @@
+{%extends 'base.html'%}
+{%block content%}
+{{ super() }}
+<div class="container">
+    <div class="row">
+        <!--Display username-->
+        <div class="col-md-4">
+            <h4>{{user.username|capitalize}}</h4>
+            <!--Display bio-->
+            {%if user.bio%}
+            <p>{{user.bio}}</p>
+            {%else%}
+            <p>{{user.username|capitalize}} has no bio</p>
+            {%endif%}
+        </div>
+        <!--Display profile photo-->
+        <div class="col-md-4">
+            {%if user.profile_pic_path%}
+            <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail">
+            {%else%}
+            <p>Profile pi not availabe</p>
+            {%endif%}
+        </div>
+    </div>
+</div>
+{%endblock%}
