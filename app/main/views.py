@@ -6,12 +6,25 @@ from .forms import UpdateProfile,MyComment,PitchNow
 from .. import db
 
 @main.route('/')
-@login_required
 def index():
     return render_template('index.html')
 
+@main.route('/pitch',methods=['GET','POST'])
+@login_required
+def pitch():
+    form = PitchNow()
+    if form.validate_on_submit():
+        new_pitch = Pitch(upvotes=0,downvotes=0,title=form.title.data,pitch=form.content.data,user_id =current_user.id)
+        new_pitch.save_pitch()
+
+        return redirect(url_for('main.pitch'))
+    pitches = Pitch.get_pitches()
+    users = User.query.all()
+
+    return render_template('pitch.html',form=form,pitches=pitches,users=users)
 
 @main.route('/user/<uname>')
+@login_required
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
 
