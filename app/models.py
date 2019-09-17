@@ -58,6 +58,8 @@ class Pitch(db.Model):
     user_id = db.Column(db.Integer,db.ForeignKey("users.id"),nullable=False)
     # relationships
     comments = db.relationship('Comment',backref='pitch',lazy='dynamic')
+    upvotes = db.relationship('Upvote',backref='pitch',lazy='dynamic')
+    
 
     def save_pitch():
         db.session.add(self)
@@ -99,6 +101,37 @@ class Upvote(db.Model):
 
     def __repr__(self):
         return f'{self.user_id}:{self.pitch_id}'
+
+# down votes model
+class DownVote(db.Model):
+    __tablename__='downvotes'
+
+    id = db.Column(db.Integer,primary_key=True)
+    downvote=db.Column(db.Integer,default=1)
+    pitch_id = db.Column(db.Integer,db.ForeignKey("pitches.id"))
+    user_id = db.Column(db.Integer,db.ForeignKey('users.id'),nullable=False)
+
+    def save_downvote():
+        db.session.save(self)
+        db.session.commit()
+
+    def total_downvotes():
+        downvote_pitch= DownVote(user=current_user,pitch_id=id)
+        downvote_pitch.save_downvote()
+
+    @classmethod
+    def get_downvotes(cls,id):
+        downvote=DownVote.query.filter_by(pitch_id=id).all()
+        return downvote
+
+    @classmethod
+    def get_all_downvotes(cls,id):
+        downvotes = DownVote.query.order_by('id').all()
+        return downvotes
+
+    def __repr__(self):
+        return f'{self.user_id}:{self.pitch_id}'
+
 # comment model
 class Comment(db.Model):
     __tablename__='comments'
