@@ -6,11 +6,16 @@
 <!--google fonts-->
 <!--font awesome-->
 {% endblock %}
+
 <body>
     {%block navbar%}
     {%include 'navbar.html'%}
     {% endblock %}
     {%block content%}
+    {% endblock %}
+    
+    {%block pitches%}
+
     {% endblock %}
 </body>
 {%block scripts%}
@@ -24,4 +29,5 @@
     integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
     crossorigin="anonymous"></script>
 {% endblock %}
+
 </html>

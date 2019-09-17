@@ -1,6 +1,6 @@
-
-    <div class="navbar navbar-inverse nav-dark bg-dark" role="navigation">
-        <div class="container-fluid">
+<div class="navbar navbar-dark bg-primary" role="navigation" >
+        <div class="container" style="text-align: center; color: aliceblue; font-family: 'Roboto Condensed', sans-serif;
+        ">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                   <span class="sr-only">Toggle navigation</span>
@@ -8,20 +8,30 @@
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/"> Pitch_It </a>
-            </div>
+                <ul>
+                <a style="text-align: center; color: aliceblue; font-family: 'Roboto Condensed', sans-serif;" class="navbar-brand" href="/pitches/new/"> Pitch here Rafiki </a>
+                </ul>
+              </div>
+
             <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li><a href="/">Home</a></li>
-                </ul>
-                <ul class="nav navbar-nav nav-dark bg-dark navbar-right">
-                  {% if current_user.is_authenticated %}
-                  <li><a href="{{url_for('main.profile',uname=current_user.username)}}">Profile</a></li>
-                  <li><a href="{{url_for('auth.logout')}}">Sign out</a></li>
-                  {% else %}
-                  <li><a href="{{url_for('auth.login')}}">Sign in</a></li>
-                  {%endif%}
-                </ul>
+            <ul class="nav navbar-nav navbar-right">
+              {% if current_user.is_authenticated %}
+              <li style="color:whitesmoke; font-family:'Roboto Condensed', sans-serif;">{{current_user.username}}</li>
+              <li><a style="color: whitesmoke; font-family: 'Roboto Condensed', sans-serif;"  href="{{url_for('auth.logout')}}">Sign out Rafiki</a></li>
+              {% else %}
+              <li><a style="color: whitesmoke; font-family: 'Roboto Condensed', sans-serif;" href="{{url_for('auth.login')}}">Sign in Rafiki {{current_user.username}}</a></li>
+              {%endif%}
+            </ul>
+          </div>
+
+
+          <div class="navbar-collapse collapse">
+              <ul class="nav navbar-nav navbar-right">
+                <li style="color:whitesmoke"></li>
+                <li><a style="color: whitesmoke;"  href="{{url_for('auth.logout')}}"></a></li>
+                <li><a style="color: whitesmoke;" href="{{url_for('auth.login')}}"></a></li>
+              </ul>
             </div>
-        </div>
+          
+    </div>
     </div>
