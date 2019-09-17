@@ -51,13 +51,13 @@ class Pitch(db.Model):
     __tablename__='pitches'
 
     id=db.Column(db.Integer,primary_key=True)
-    upvotes = db.Column(db.Integer)
-    downvotes = db.Column(db.Integer)
     title = db.Column(db.String(255))
+    category = db.Column(db.String(255),nullable=False)
     pitch = db.Column(db.String(255))
     posted = db.Column(db.DateTime,default=datetime.utcnow)
-    user_id = db.Column(db.Integer,db.ForeignKey("users.id"))
-    comments = db.relationship('Comment',backref='user',lazy='dynamic')
+    user_id = db.Column(db.Integer,db.ForeignKey("users.id"),nullable=False)
+    # relationships
+    comments = db.relationship('Comment',backref='pitch',lazy='dynamic')
 
     def save_pitch():
         db.session.add(self)
@@ -68,11 +68,44 @@ class Pitch(db.Model):
         pitches = Pitch.query.order_by(Pitch.posted.desc()).all()
         return pitches
 
+    def __repr__(self):
+        return f'Pitch {self.pitch}'
+# upvotes model
+class Upvote(db.Model):
+    __tablename__='upvotes'
+
+    id= db.Column(db.Integer,primary_key=True)
+    upvote=db.Column(db.Integer,default=1)
+    pitch_id = db.Column(db.Integer,db.ForeignKey("pitches.id"))
+    user_id = db.Column(db.Integer,db.ForeignKey('users.id'),nullable=False)
+
+    def save_upvote():
+        db.session.save(self)
+        db.session.commit()
+
+    def total_upvotes():
+        upvote_pitch = Upvote(user=current_user,pitch_id=id)
+        upvote_pitch.save_upvote()
+
+    @classmethod
+    def get_upvotes(cls,id):
+        upvote = Upvote.query.filter_by(pitch_id=id).all()
+        return upvote
+
+    @classmethod
+    def get_all_upvotes(cls,pitch_id):
+        upvotes = Upvote.query.order_by('id').all()
+        return upvotes
+
+    def __repr__(self):
+        return f'{self.user_id}:{self.pitch_id}'
+# comment model
 class Comment(db.Model):
     __tablename__='comments'
     id = db.Column(db.Integer,primary_key=True)
     comment = db.Column(db.String(255))
     pitch_id = db.Column(db.Integer,db.ForeignKey("pitches.id"))
+    user_id = db.Column(db.Integer,db.ForeignKey('users.id'),nullable=False)
     posted = db.Column(db.DateTime,default=datetime.utcnow)
 
     def save_comment():
@@ -83,3 +116,7 @@ class Comment(db.Model):
     def get_comments(cls):
         comments = Comment.query.order_by(Comment.posted.desc()).all()
         return comments
+
+    def __repr__(self):
+        return f'Comment id: {self.id} comment : {self.comment}'
+

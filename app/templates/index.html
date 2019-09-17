@@ -1,4 +1,18 @@
 {%extends 'base.html'%}
 {%block content%}
-    <h1 class="text-center">You have 60 seconds<br>PITCH IT!</h1>
+<h1 class="text-center">You have 60 seconds PITCH IT!</h1>
+<div class="container">
+    <h1 class="text-center">Pitch my content</h1>
+    <div class="row">
+        <div class="col-md-4">
+            {% if current_user.is_authenticated %}
+            <button class="btn btn-primary">Pitch</button>
+            <button class="btn btn-primary">Comment</button>
+            {%else%}
+            <p> Seems like you don't have an account.
+                <a href="{{url_for('auth.login')}}">Sign in </a>here</p>
+            {%endif%}
+        </div>
+    </div>
+</div>
 {%endblock%}
