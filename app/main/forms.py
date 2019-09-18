@@ -13,12 +13,12 @@ class PitchNow(FlaskForm):
     description = TextAreaField('Pitch my idea',validators=[Required()])
     submit = SubmitField('submit')
 
-# class MyComment(FlaskForm):
-#     comment = TextAreaField('Your comment',validators=[Required()])
-#     submit = SubmitField('submit')
+class MyComment(FlaskForm):
+    comment = TextAreaField('Your comment',validators=[Required()])
+    submit = SubmitField('submit')
 
-# class UpVote(FlaskForm):
-#     upvote = SubmitField('submit')
+class UpVote(FlaskForm):
+    upvote = SubmitField('submit')
 
-# class Downvote(FlaskForm):
-#     downvote = SubmitField('submit')
+class DownVote(FlaskForm):
+    downvote = SubmitField('submit')

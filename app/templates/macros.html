@@ -10,9 +10,9 @@
                 <h2>{{category.description}}</h2>
                 <p>posted by: {{category.user.username}}</p>
             </div>
-            <!-- <a href="{{url_for('main.new_comment',pitch_id=category.id)}}"><button class="btn btn-primary">Comment</button></a>
+            <a href="{{url_for('main.new_comment',pitch_id=category.id)}}"><button class="btn btn-primary">Comment</button></a>
             <a href="{{url_for('main.upvote',pitch_id=category.id)}}"><button class="btn btn-primary">Upvote</button></a>
-            <a href="{{url_for('main.downvote',pitch_id=category.id)}}"><button class="btn btn-primary">Downvote</button></a> -->
+            <a href="{{url_for('main.downvote',pitch_id=category.id)}}"><button class="btn btn-primary">Downvote</button></a>
         </div>
     </div>
     {%endfor%}
@@ -20,3 +20,18 @@
     {%endif%}
 </div>
 {% endmacro %}
+
+{%macro displayComment(comments)%}
+<ul>
+    {%if comments%}
+    {%for comment in comments%}
+    <div class="row text-center">
+        <p>{{comment.description}}</p>
+        <p>Posted by: {{comment.user.username}}</p>
+    </div>
+    {%endfor%}
+    {%else%}
+    <p>This post has no comments yet.</p>
+    {%endif%}
+</ul>
+{%endmacro%}
